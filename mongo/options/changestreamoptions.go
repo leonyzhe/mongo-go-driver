@@ -46,6 +46,8 @@ type ChangeStreamOptions struct {
 	// corresponding to an oplog entry immediately after the specified token will be returned. If this is specified,
 	// ResumeAfter and StartAtOperationTime must not be set. This option is only valid for MongoDB versions >= 4.1.1.
 	StartAfter interface{}
+
+	MoreEvent bool
 }
 
 // ChangeStream creates a new ChangeStreamOptions instance.
