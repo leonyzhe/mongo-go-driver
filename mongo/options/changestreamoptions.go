@@ -47,7 +47,8 @@ type ChangeStreamOptions struct {
 	// ResumeAfter and StartAtOperationTime must not be set. This option is only valid for MongoDB versions >= 4.1.1.
 	StartAfter interface{}
 
-	MoreEvent bool
+	// Only for mongoflow, if moreEvent is true will return additional events which op type is create, collMod etc.
+	MoreEvent *bool
 }
 
 // ChangeStream creates a new ChangeStreamOptions instance.
@@ -127,6 +128,9 @@ func MergeChangeStreamOptions(opts ...*ChangeStreamOptions) *ChangeStreamOptions
 		}
 		if cso.StartAfter != nil {
 			csOpts.StartAfter = cso.StartAfter
+		}
+		if cso.MoreEvent != nil {
+			csOpts.MoreEvent = cso.MoreEvent
 		}
 	}
 

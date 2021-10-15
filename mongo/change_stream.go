@@ -389,6 +389,14 @@ func (cs *ChangeStream) createPipelineOptionsDoc() bsoncore.Document {
 		plDoc = bsoncore.AppendTimestampElement(plDoc, "startAtOperationTime", cs.options.StartAtOperationTime.T, cs.options.StartAtOperationTime.I)
 	}
 
+	if cs.options.MoreEvent != nil {
+		moreEvent := "false"
+		if *cs.options.MoreEvent {
+			moreEvent = "true"
+		}
+		plDoc = bsoncore.AppendStringElement(plDoc, "moreEvent", moreEvent)
+	}
+
 	if plDoc, cs.err = bsoncore.AppendDocumentEnd(plDoc, plDocIdx); cs.err != nil {
 		return nil
 	}
